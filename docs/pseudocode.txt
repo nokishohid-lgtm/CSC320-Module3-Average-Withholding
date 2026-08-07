@@ -1,0 +1,26 @@
+START
+
+DECLARE weeklyIncome AS REAL
+DECLARE taxRate AS REAL
+DECLARE averageWithholding AS REAL
+
+DISPLAY "Enter weekly income: $"
+INPUT weeklyIncome
+
+IF weeklyIncome < 500 THEN
+    SET taxRate = 0.10
+ELSE IF weeklyIncome >= 500 AND weeklyIncome < 1500 THEN
+    SET taxRate = 0.15
+ELSE IF weeklyIncome >= 1500 AND weeklyIncome < 2500 THEN
+    SET taxRate = 0.20
+ELSE
+    SET taxRate = 0.30
+END IF
+
+SET averageWithholding = weeklyIncome * taxRate
+
+DISPLAY weeklyIncome
+DISPLAY taxRate AS A PERCENTAGE
+DISPLAY averageWithholding
+
+END
