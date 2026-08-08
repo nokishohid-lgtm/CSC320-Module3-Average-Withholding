@@ -1,0 +1,50 @@
+name: Run Average Withholding Tests
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/AverageWithholding.java"
+      - ".github/workflows/run-average-withholding.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  compile-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Compile Java program
+        run: javac src/AverageWithholding.java
+
+      - name: Test income below 500
+        run: |
+          echo "Test input: 400"
+          printf "400\n" | java -cp src AverageWithholding
+
+      - name: Test income equal to 500
+        run: |
+          echo "Test input: 500"
+          printf "500\n" | java -cp src AverageWithholding
+
+      - name: Test income equal to 1500
+        run: |
+          echo "Test input: 1500"
+          printf "1500\n" | java -cp src AverageWithholding
+
+      - name: Test income equal to 2500
+        run: |
+          echo "Test input: 2500"
+          printf "2500\n" | java -cp src AverageWithholding
